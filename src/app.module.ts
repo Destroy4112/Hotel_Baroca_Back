@@ -12,6 +12,8 @@ import { AuthModule } from './auth/auth.module';
 import { ClientesModule } from './clientes/clientes.module';
 import { EspaciosModule } from './espacios/espacios.module';
 import { PreregistrosModule } from './preregistros/preregistros.module';
+import { HabitacionesModule } from './habitaciones/habitaciones.module';
+import { ReservasModule } from './reservas/reservas.module';
 
 @Module({
   imports: [
@@ -29,7 +31,9 @@ import { PreregistrosModule } from './preregistros/preregistros.module';
     AuthModule,
     ClientesModule,
     EspaciosModule,
-    PreregistrosModule
+    PreregistrosModule,
+    HabitacionesModule,
+    ReservasModule
   ],
   controllers: [AppController],
   providers: [AppService, ValidationsService],

@@ -1,6 +1,7 @@
 import { Cliente } from "src/clientes/entities/cliente.entity";
 import { Espacio } from "src/espacios/entities/espacio.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Reserva } from "src/reservas/entities/reserva.entity";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: "preregistros" })
 export class Preregistro {
@@ -36,4 +37,7 @@ export class Preregistro {
 
     @UpdateDateColumn({ type: 'timestamp' })
     update_at: string;
+
+    @OneToOne(() => Reserva, reserva => reserva.preregistro)
+    reserva: Reserva[]
 }

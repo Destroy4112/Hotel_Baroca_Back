@@ -1,3 +1,4 @@
+import { Habitacione } from "src/habitaciones/entities/habitacione.entity";
 import { Preregistro } from "src/preregistros/entities/preregistro.entity";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -20,5 +21,9 @@ export class Espacio {
     update_at: Date;
 
     @OneToMany(() => Preregistro, preregistro => preregistro.espacio)
-    preregistro: Preregistro;
+    preregistro: Preregistro[];
+
+    @OneToMany(() => Habitacione, habitacione => habitacione.espacio)
+    habitacion: Habitacione[];
+
 }

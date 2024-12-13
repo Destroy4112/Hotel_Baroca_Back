@@ -47,5 +47,5 @@ export class Cliente {
     update_at: string;
 
     @OneToMany(() => Preregistro, preregistro => preregistro.cliente)
-    preregistro: Preregistro;
+    preregistro: Preregistro[];
 }

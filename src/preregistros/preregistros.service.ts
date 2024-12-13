@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreatePreregistroDto } from './dto/create-preregistro.dto';
-import { UpdatePreregistroDto } from './dto/update-preregistro.dto';
 import { Preregistro } from './entities/preregistro.entity';
 
 @Injectable()
@@ -22,18 +21,18 @@ export class PreregistrosService {
   }
 
   async findPendientes() {
-    return await this.repository.find({ where: { estado: 'En proceso' }, relations: ['espacio, cliente'] }); 
+    return await this.repository.find({ where: { estado: 'En proceso' }, relations: ['espacio', 'cliente'] });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} preregistro`;
+  async findById(id: number) {
+    return await this.repository.findOne({ where: { id } });
   }
 
-  update(id: number, updatePreregistroDto: UpdatePreregistroDto) {
-    return `This action updates a #${id} preregistro`;
+  async updateEstado(id: number, estado: string) {
+    const preregistro = await this.repository.findOne({ where: { id } });
+    if (!preregistro) throw new HttpException({ status: false, errors: 'Preregistro no encontrado.' }, HttpStatus.NOT_FOUND);
+    preregistro.estado = estado;
+    return await this.repository.save(preregistro);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} preregistro`;
-  }
 }

@@ -11,5 +11,6 @@ import { PreregistrosService } from './preregistros.service';
   imports: [TypeOrmModule.forFeature([Preregistro]), ValidationsModule, ClientesModule, EspaciosModule],
   controllers: [PreregistrosController],
   providers: [PreregistrosService],
+  exports: [PreregistrosService]
 })
 export class PreregistrosModule { }
