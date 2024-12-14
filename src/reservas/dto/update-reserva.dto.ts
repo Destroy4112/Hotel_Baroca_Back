@@ -1,7 +1,5 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
-import { Habitacione } from 'src/habitaciones/entities/habitacione.entity';
-import { Preregistro } from 'src/preregistros/entities/preregistro.entity';
 import { CreateReservaDto } from './create-reserva.dto';
 
 export class UpdateReservaDto extends PartialType(CreateReservaDto) {
@@ -23,10 +21,12 @@ export class UpdateReservaDto extends PartialType(CreateReservaDto) {
     motivo_viaje?: string;
 
     @IsOptional()
-    habitacion?: Habitacione;
+    @IsNumber({}, { message: 'La habitacion debe ser un numero' })
+    habitacion?: number;
 
     @IsOptional()
-    preregistro?: Preregistro;
+    @IsNumber({}, { message: 'El preregistro debe ser un numero' })
+    preregistro?: number;
 
     @IsOptional()
     @IsNumber()

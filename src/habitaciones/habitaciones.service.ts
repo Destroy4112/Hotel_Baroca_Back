@@ -32,7 +32,7 @@ export class HabitacionesService {
   }
 
   async findByTipoYHotel(tipo: string, espacio: number) {
-    return await this.repository.find({ where: { espacio: { id: espacio }, tipo_habitacion: tipo }, order: { piso: 'ASC', nombre_habitacion: 'ASC' } });
+    return await this.repository.find({ where: { espacio: { id: espacio }, tipo_habitacion: tipo, disponibilidad: 'Disponible' }, order: { piso: 'ASC', nombre_habitacion: 'ASC' } });
   }
 
   async update(id: number, updateHabitacioneDto: UpdateHabitacioneDto) {
@@ -49,7 +49,7 @@ export class HabitacionesService {
   async updateEstado(id: number, estado: string) {
     const habitacion = await this.repository.findOne({ where: { id } });
     if (!habitacion) throw new HttpException({ status: false, errors: 'Habitacion no encontrada.' }, HttpStatus.NOT_FOUND);
-    habitacion.estado = estado;
+    habitacion.disponibilidad = estado;
     return await this.repository.save(habitacion);
   }
 

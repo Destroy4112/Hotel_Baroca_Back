@@ -1,6 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
-import { Habitacione } from "src/habitaciones/entities/habitacione.entity";
-import { Preregistro } from "src/preregistros/entities/preregistro.entity";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateReservaDto {
     @IsString({ message: 'La ciudad de procedencia debe ser un string' })
@@ -20,11 +18,13 @@ export class CreateReservaDto {
     motivo_viaje: string;
 
     @IsNotEmpty({ message: 'La habitacion es requerido' })
-    habitacion: Habitacione;
+    @IsNumber({}, { message: 'La habitacion debe ser un numero' })
+    habitacion: number;
 
     @IsNotEmpty({ message: 'El preregistro es requerido' })
-    preregistro: Preregistro;
+    @IsNumber({}, { message: 'El preregistro debe ser un numero' })
+    preregistro: number;
 
     @IsNotEmpty({ message: 'El numero de noches es requerido' })
-    noches: number;
+    noches: number; 
 }

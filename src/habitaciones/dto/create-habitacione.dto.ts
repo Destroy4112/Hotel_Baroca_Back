@@ -12,11 +12,11 @@ export class CreateHabitacioneDto {
     descripcion_habitacion: string;
 
     @IsNotEmpty({ message: 'El numero de habitacion es requerido' })
-    @IsNumber()
+    @IsNumber({}, { message: 'El numero de habitacion debe ser un numero' })
     numero_habitacion: number;
 
     @IsNotEmpty({ message: 'La capacidad de la habitacion es requerida' })
-    @IsNumber()
+    @IsNumber({}, { message: 'La capacidad de la habitacion debe ser un numero' })
     capacidad_habitacion: number;
 
     @IsNotEmpty({ message: 'El precio de la habitacion es requerido' })
@@ -28,7 +28,7 @@ export class CreateHabitacioneDto {
     tipo_habitacion: string;
 
     @IsNotEmpty({ message: 'El piso de la habitacion es requerido' })
-    @IsNumber()
+    @IsNumber({}, { message: 'El piso de la habitacion debe ser un numero' })
     piso: number;
 
     @IsNotEmpty({ message: 'El espacio es requerido' })
