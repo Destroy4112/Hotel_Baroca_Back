@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateHabitacioneDto } from './dto/create-habitacione.dto';
@@ -44,6 +44,13 @@ export class HabitacionesService {
       message: 'Habitacion actualizada exitosamente',
       data: response
     };
+  }
+
+  async updateEstado(id: number, estado: string) {
+    const habitacion = await this.repository.findOne({ where: { id } });
+    if (!habitacion) throw new HttpException({ status: false, errors: 'Habitacion no encontrada.' }, HttpStatus.NOT_FOUND);
+    habitacion.estado = estado;
+    return await this.repository.save(habitacion);
   }
 
   async remove(id: number) {
