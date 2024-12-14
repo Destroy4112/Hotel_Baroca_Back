@@ -30,7 +30,7 @@ export class EspaciosService {
   }
 
   async findByType(tipo: string) {
-    const espacio = await this.repository.findOne({ where: { tipo_espacio: tipo } });
+    const espacio = await this.repository.find({ where: { tipo_espacio: tipo } });
     if (!espacio) return new HttpException({ status: false, errors: 'Espacio no encontrado.' }, HttpStatus.NOT_FOUND);
     return espacio;
   }

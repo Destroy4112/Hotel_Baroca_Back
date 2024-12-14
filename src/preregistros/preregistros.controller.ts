@@ -15,7 +15,7 @@ export class PreregistrosController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   async findPendientes() {
     return await this.preregistrosService.findPendientes();
   }

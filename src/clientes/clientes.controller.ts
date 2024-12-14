@@ -5,12 +5,10 @@ import { ClientesService } from './clientes.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 
 @Controller('api/clientes')
-@UseGuards(JwtAuthGuard)
 export class ClientesController {
   constructor(private readonly clientesService: ClientesService) { }
 
   @Post()
-  @UseGuards(ClientesGuard)
   async create(@Body() createClienteDto: CreateClienteDto) {
     const cliente = await this.clientesService.findByDocumento(createClienteDto.documento);
     if (cliente) {
@@ -31,7 +29,7 @@ export class ClientesController {
   }
 
   @Delete(':id')
-  @UseGuards(ClientesGuard)
+  @UseGuards(JwtAuthGuard, ClientesGuard)
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.clientesService.remove(id);
   }

@@ -6,17 +6,17 @@ import { EspaciosGuard } from './espacios.guard';
 import { EspaciosService } from './espacios.service';
 
 @Controller('api/espacios')
-@UseGuards(JwtAuthGuard)
 export class EspaciosController {
   constructor(private readonly espaciosService: EspaciosService) { }
 
   @Post()
-  @UseGuards(EspaciosGuard)
+  @UseGuards(JwtAuthGuard, EspaciosGuard)
   async create(@Body() createEspacioDto: CreateEspacioDto) {
     return await this.espaciosService.create(createEspacioDto);
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   async findAll() {
     return await this.espaciosService.findAll();
   }
@@ -27,13 +27,13 @@ export class EspaciosController {
   }
 
   @Put(':id')
-  @UseGuards(EspaciosGuard)
+  @UseGuards(JwtAuthGuard, EspaciosGuard)
   async update(@Param('id', ParseIntPipe) id: number, @Body() updateEspacioDto: UpdateEspacioDto) {
     return await this.espaciosService.update(id, updateEspacioDto);
   }
 
   @Delete(':id')
-  @UseGuards(EspaciosGuard)
+  @UseGuards(JwtAuthGuard, EspaciosGuard)
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.espaciosService.remove(id);
   }
