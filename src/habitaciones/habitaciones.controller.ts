@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/config/jwt-auth.guard';
 import { CreateHabitacioneDto } from './dto/create-habitacione.dto';
 import { UpdateHabitacioneDto } from './dto/update-habitacione.dto';
 import { HabitacionesGuard } from './habitaciones.guard';
 import { HabitacionesService } from './habitaciones.service';
 
 @Controller('api/habitaciones')
+@UseGuards(JwtAuthGuard)
 export class HabitacionesController {
   constructor(private readonly habitacionesService: HabitacionesService) { }
 

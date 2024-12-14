@@ -28,7 +28,7 @@ export class ReservasService {
   }
 
   async findAll() {
-    return await this.repository.find();
+    return await this.repository.find({ relations: ['preregistro.cliente', 'preregistro.espacio', 'habitacion'] });
   }
 
 }

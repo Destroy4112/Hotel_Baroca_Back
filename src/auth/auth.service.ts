@@ -26,7 +26,7 @@ export class AuthService {
     const payload = { id: user.id, documento: user.documento };
     const token = this.jwtService.sign(payload);
     const credenciales = { id: user.id, documento: user.documento, rol: user.role, };
-    const usuario = user.empleado ? user.empleado : null;
+    const usuario = user.empleado;
     return {
       status: true,
       credenciales,

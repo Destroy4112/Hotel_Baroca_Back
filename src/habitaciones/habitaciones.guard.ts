@@ -25,7 +25,7 @@ export class HabitacionesGuard implements CanActivate {
             const habitacionExist = await this.espaciosService.findById(espacio);
             if (!habitacionExist) {
                 throw new HttpException(
-                    { status: false, errors: 'Espacio no encontrado.' },
+                    { status: false, errors: 'Habitacion no encontrada.' },
                     HttpStatus.NOT_FOUND,
                 )
             }
@@ -33,7 +33,7 @@ export class HabitacionesGuard implements CanActivate {
 
             if (exist) {
                 throw new HttpException(
-                    { status: false, errors: ['Ya existe un espacio con esta descripción.'] },
+                    { status: false, errors: ['Ya existe una habitación con esta descripción.'] },
                     HttpStatus.OK,
                 );
             }
@@ -45,7 +45,7 @@ export class HabitacionesGuard implements CanActivate {
             const habitacionExist = await this.repository.findOne({ where: { id } });
             if (!habitacionExist) {
                 throw new HttpException(
-                    { status: false, errors: 'Espacio no encontrado.' },
+                    { status: false, errors: 'Habitacion no encontrada.' },
                     HttpStatus.NOT_FOUND,
                 );
             }
@@ -53,7 +53,7 @@ export class HabitacionesGuard implements CanActivate {
             const exist = await this.repository.findOne({ where: { nombre_habitacion, espacio: { id: espacio }, id: Not(id) } });
             if (exist) {
                 throw new HttpException(
-                    { status: false, errors: ['Ya existe un espacio con esta descripción.'] },
+                    { status: false, errors: ['Ya existe una habitación con este nombre.'] },
                     HttpStatus.OK,
                 );
             }
@@ -62,7 +62,7 @@ export class HabitacionesGuard implements CanActivate {
             const espacio = await this.repository.findOne({ where: { id } });
             if (!espacio) {
                 throw new HttpException(
-                    { status: false, errors: 'Espacio no encontrado.' },
+                    { status: false, errors: 'Habitacion no encontrada.' },
                     HttpStatus.NOT_FOUND,
                 );
             }

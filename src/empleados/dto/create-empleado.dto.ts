@@ -16,9 +16,6 @@ export class CreateEmpleadoDto {
     @IsString({ message: 'El documento debe ser un string' })
     documento: string;
 
-    @IsNotEmpty({ message: 'El usuario es requerido' })
-    usuario: Usuario;
-
     @IsNotEmpty({ message: 'El genero es requerido' })
     @IsString({ message: 'El genero debe ser un string' })
     genero: string;

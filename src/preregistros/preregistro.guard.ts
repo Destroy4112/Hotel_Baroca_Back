@@ -43,7 +43,7 @@ export class PreregistrosGuard implements CanActivate {
             const exist = await this.repository.findOne({ where: { cliente, fecha_ingreso } });
             if (exist) {
                 throw new HttpException(
-                    { status: false, errors: ['Ya existe un preregistro con estos datos.'] },
+                    { status: false, errors: 'Ya existe un preregistro en esta fecha.' },
                     HttpStatus.OK,
                 );
             }

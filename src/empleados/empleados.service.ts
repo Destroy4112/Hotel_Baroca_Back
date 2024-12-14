@@ -28,7 +28,7 @@ export class EmpleadosService {
   }
 
   async findAll() {
-    return await this.repository.find();
+    return await this.repository.find({ relations: ['usuario_id.role', ] });
   }
 
   async findOne(id: number) {
