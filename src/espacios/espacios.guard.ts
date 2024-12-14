@@ -47,6 +47,12 @@ export class EspaciosGuard implements CanActivate {
                     HttpStatus.OK,
                 );
             }
+        } else if (method === 'DELETE') {
+            const { id } = params;
+            const espacio = await this.repository.findOne({ where: { id } });
+            if (!espacio) {
+                throw new HttpException({ status: false, errors: 'Espacio no encontrado' }, HttpStatus.NOT_FOUND)
+            };
         }
 
         return true;

@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateRoleDto } from './dto/create-role.dto';
@@ -42,17 +42,7 @@ export class RolesService {
   }
 
   async remove(id: number) {
-    const existingRole = await this.roleRepository.findOne({ where: { id } });
-    if (!existingRole)
-      throw new HttpException({ status: false, errors: ['Rol no encontrado.'] }, HttpStatus.NOT_FOUND,
-      );
-    // const rol = await this.userService.findByRole(id);
-    // if (rol.length)
-    //   throw new HttpException(
-    //     { status: false, errors: ['Rol no puede ser eliminado.'] },
-    //     HttpStatus.ACCEPTED,
-    //   );
-    await this.roleRepository.remove(existingRole);
+    await this.roleRepository.delete(id);
     return {
       status: true,
       message: 'Rol eliminado correctamente.',

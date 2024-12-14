@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsuariosService } from 'src/usuarios/usuarios.service';
 import { Repository } from 'typeorm';
@@ -51,7 +51,6 @@ export class EmpleadosService {
 
   async remove(id: number) {
     const usuario = await this.repository.findOne({ where: { id }, relations: ['usuario_id'] });
-    if (!usuario) throw new HttpException({ status: false, errors: 'Usuario no encontrado' }, HttpStatus.NOT_FOUND);
     await this.usuariosService.remove(usuario.usuario_id.id);
     await this.repository.remove(usuario);
     return { status: true, message: 'Empleado eliminado correctamente.' };

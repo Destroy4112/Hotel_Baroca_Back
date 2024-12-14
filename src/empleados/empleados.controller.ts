@@ -33,6 +33,7 @@ export class EmpleadosController {
   }
 
   @Delete(':id')
+  @UseGuards(EmpleadosGuard)
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.empleadosService.remove(id);
   }

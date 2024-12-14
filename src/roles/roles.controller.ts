@@ -33,6 +33,7 @@ export class RolesController {
   }
 
   @Delete(':id')
+  @UseGuards(RolesGuard)
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.rolesService.remove(id);
   }

@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ValidationsService } from 'src/validations/validations.service';
 import { Repository } from 'typeorm';
@@ -49,9 +49,7 @@ export class ClientesService {
   }
 
   async remove(id: number) {
-    const cliente = await this.repository.findOne({ where: { id } });
-    if (!cliente) throw new HttpException({ status: false, errors: 'Cliente no encontrado' }, HttpStatus.NOT_FOUND);
-    await this.repository.remove(cliente);
+    await this.repository.delete(id);
     return {
       status: true,
       message: 'Cliente eliminado correctamente.',

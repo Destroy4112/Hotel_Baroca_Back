@@ -47,9 +47,7 @@ export class EspaciosService {
   }
 
   async remove(id: number) {
-    const espacio = await this.repository.findOne({ where: { id } });
-    if (!espacio) throw new HttpException({ status: false, errors: 'Espacio no encontrado.' }, HttpStatus.NOT_FOUND);
-    await this.repository.remove(espacio);
+    await this.repository.delete(id);
     return {
       status: true,
       message: 'Espacio eliminado exitosamente'

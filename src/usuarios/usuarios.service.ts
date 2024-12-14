@@ -27,6 +27,10 @@ export class UsuariosService {
     return await this.usuarioRepository.findOne({ where: { documento } });
   }
 
+  async findByRole(id: number) {
+    return await this.usuarioRepository.find({ where: { role: { id } } });
+  }
+
   async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
     await this.validationService.validateDto(UpdateUsuarioDto, updateUsuarioDto);
     const user = await this.usuarioRepository.findOne({ where: { id } });

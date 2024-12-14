@@ -50,6 +50,12 @@ export class EmpleadosGuard implements CanActivate {
                     HttpStatus.OK,
                 );
             }
+        } else if (method === 'DELETE') {
+            const { id } = params;
+            const empleado = await this.repository.findOne({ where: { id } });
+            if (!empleado) {
+                throw new HttpException({ status: false, errors: 'Empleado no encontrado' }, HttpStatus.NOT_FOUND)
+            };
         }
 
         return true;

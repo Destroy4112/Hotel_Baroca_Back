@@ -33,6 +33,7 @@ export class EspaciosController {
   }
 
   @Delete(':id')
+  @UseGuards(EspaciosGuard)
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.espaciosService.remove(id);
   }
