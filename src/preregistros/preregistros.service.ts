@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { NotificacionesService } from 'src/notificaciones/notificaciones.service';
 import { Repository } from 'typeorm';
 import { CreatePreregistroDto } from './dto/create-preregistro.dto';
 import { Preregistro } from './entities/preregistro.entity';
@@ -9,10 +10,12 @@ export class PreregistrosService {
 
   constructor(
     @InjectRepository(Preregistro) private repository: Repository<Preregistro>,
+    private readonly notificacionesService: NotificacionesService
   ) { }
 
   async create(createPreregistroDto: CreatePreregistroDto) {
     const preregistro = await this.repository.save(createPreregistroDto);
+    await this.notificacionesService.create({ notificacion: preregistro.cliente + " ha creado un preregistro" });
     return {
       status: true,
       message: 'Preregistro creado exitosamente',
