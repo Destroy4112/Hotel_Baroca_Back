@@ -15,7 +15,7 @@ export class PreregistrosService {
 
   async create(createPreregistroDto: CreatePreregistroDto) {
     const preregistro = await this.repository.save(createPreregistroDto);
-    await this.notificacionesService.create({ notificacion: preregistro.cliente + " ha creado un preregistro" });
+    await this.notificacionesService.create({ notificacion: preregistro.cliente.nombres + " ha creado un preregistro" });
     return {
       status: true,
       message: 'Preregistro creado exitosamente',
