@@ -14,6 +14,7 @@ import { RolesModule } from './roles/roles.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { ValidationsModule } from './validations/validations.module';
 import { ValidationsService } from './validations/validations.service';
+import { NotificacionesModule } from './notificaciones/notificaciones.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { ValidationsService } from './validations/validations.service';
     EspaciosModule,
     PreregistrosModule,
     HabitacionesModule,
-    ReservasModule
+    ReservasModule,
+    NotificacionesModule
   ],
   controllers: [AppController],
   providers: [AppService, ValidationsService],
