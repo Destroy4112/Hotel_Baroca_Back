@@ -1,8 +1,11 @@
-import { IsOptional } from "class-validator";
+import { IsNotEmpty } from "class-validator";
 
 export class CreateNotificacioneDto {
 
-    @IsOptional()
-    notificacion?: string;
-    
+    @IsNotEmpty({ message: 'La notificacion es requerida' })
+    notificacion: string;
+
+    @IsNotEmpty({ message: 'El usuario es requerido' })
+    usuario: string;
+
 }

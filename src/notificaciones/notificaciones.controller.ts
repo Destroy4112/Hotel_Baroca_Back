@@ -1,7 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/config/jwt-auth.guard';
 import { CreateNotificacioneDto } from './dto/create-notificacione.dto';
-import { UpdateNotificacioneDto } from './dto/update-notificacione.dto';
 import { NotificacionesService } from './notificaciones.service';
 
 @Controller('api/notificaciones')
@@ -24,9 +23,9 @@ export class NotificacionesController {
     return this.notificacionesService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateNotificacioneDto: UpdateNotificacioneDto) {
-    return this.notificacionesService.update(+id, updateNotificacioneDto);
+  @Put('marcar-como-leidas')
+  async marcarComoLeidas(@Body() notificationIds: number[]) {
+    return await this.notificacionesService.markAsRead(notificationIds);
   }
 
   @Delete(':id')
