@@ -22,7 +22,7 @@ import { ValidationsService } from './validations/validations.service';
       type: 'mysql',
       url: process.env.DB_URL,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      // synchronize: true,
+      synchronize: true,
     }),
     RolesModule,
     UsuariosModule,
